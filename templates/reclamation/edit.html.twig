@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ReclamationController!{% endblock %}
+
+{% block body %}
+    {{ form_start(formReclamation)}}
+    {{ include('reclamation/form.html.twig') }}
+    <button class="btn btn-primary">Editer</button>
+    {{ form_end(formReclamation)}}
+
+{% endblock %}

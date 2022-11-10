@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ReclamationRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,19 +16,30 @@ class Reclamation
     private ?int $id = null;
 
     #[ORM\Column(length: 25)]
+    #[Assert\NotBlank(message:"le nom d'ulisateur est obligatoire")]
     private ?string $nomUser = null;
 
     #[ORM\Column(length: 25)]
+    #[Assert\NotBlank(message:"le prenom d'ulisateur est obligatoire")]
     private ?string $prenomUser = null;
 
     #[ORM\Column(length: 25)]
+    #[Assert\NotBlank(message:"le type d'ulisateur est obligatoire")]
     private ?string $typeUser = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message:"sans contenu votre reclamation ne peut aboutir")]
     private ?string $contenu = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Reponse $reponse = null;
+
+    public function __construct(){
+        $this->createdAt=new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +102,18 @@ class Reclamation
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getReponse(): ?Reponse
+    {
+        return $this->reponse;
+    }
+
+    public function setReponse(?Reponse $reponse): self
+    {
+        $this->reponse = $reponse;
 
         return $this;
     }

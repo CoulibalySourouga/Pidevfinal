@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block title %}ADD Page{% endblock %}
+{% block body %}
+<h1>Ajouter un nouveau Entretien</h1>
+    {{ form_start(formEntretien,{'attr': {'novalidate': 'novalidate'}}) }}
+        {{ include('entretien/form.html.twig') }}
+    <button class="btn btn-primary">Ajouter</button>
+
+    {{ form_end(formEntretien) }}
+{% endblock %}

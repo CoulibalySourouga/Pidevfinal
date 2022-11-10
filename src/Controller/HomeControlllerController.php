@@ -13,6 +13,7 @@ class HomeControlllerController extends AbstractController
      * @return Response
      */
    public function home(){
-       return $this->render('index.html.twig');
+       $date = new \DateTime();
+       return $this->render('index.html.twig',array("dateDuJour"=>$date));
    }
 }

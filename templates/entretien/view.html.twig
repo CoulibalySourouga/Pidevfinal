@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    {{ entretien.description|slice(0,20) }}...
+{% endblock %}
+{% block body %}
+    <img style="border-radius: 50%;height: 100px;width: 100px; " class="img-profile "
+         src="{{ asset('assets/20200404_160907.jpg') }}">
+    <label>Description</label>
+    <p>{{ entretien.description }}...</p>
+    <label> Nom du postulant:{{ entretien.nomPostulant }}</label>
+     <label> Prénom du postulant:{{ entretien.prenomPostulant }}</label>
+    <label> Nom du recruteur:{{ entretien.nomRecruteur }} </label>
+    <label> Prénom du recruteur: {{ entretien.prenomRecruteur }}</label>
+    <label><h3>La date de l'entretien:{{ entretien.dateEntentien |date("d/m/y") }}</h3></label>
+
+    <small class="text-muted"> date d'ajout:{{ entretien.createdAt |date("d/m/y") }}</small>
+{% endblock %}

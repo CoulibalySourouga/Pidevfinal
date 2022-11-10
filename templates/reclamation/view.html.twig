@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    {{ reclamation.typeUser }}...
+{% endblock %}
+{% block body %}
+    <img style="border-radius: 50%;height: 100px;width: 100px; " class="img-profile "
+         src="{{ asset('assets/20200404_160907.jpg') }}">
+    <label>Contenu</label>
+    <p>{{ reclamation.contenu }}...</p>
+    <label> Nom de l'utilisateur:{{ reclamation.nomUser}}</label>
+    <label> Prénom de l'utilisateur:{{ reclamation.prenomUser }}</label>
+    <label> Type d'utilisateur:{{ reclamation.typeUser }} </label>
+
+    <small class="text-muted"> date d'ajout:{{ reclamation.createdAt |date("d/m/y") }}</small>
+{% endblock %}

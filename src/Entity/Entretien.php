@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\EntretienRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,25 +16,40 @@ class Entretien
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message:"la description est obligatoire")]
     private ?string $description = null;
 
     #[ORM\Column(length: 25)]
+    #[Assert\NotBlank(message:"le nom du postulant est obligatoire")]
     private ?string $nomPostulant = null;
 
     #[ORM\Column(length: 25)]
+    #[Assert\NotBlank(message:"le prenom du postulant est obligatoire")]
     private ?string $prenomPostulant = null;
 
     #[ORM\Column(length: 25)]
+    #[Assert\NotBlank(message:"le nom du recruteur est obligatoire")]
     private ?string $nomRecruteur = null;
 
     #[ORM\Column(length: 25)]
+    #[Assert\NotBlank(message:"le prenom du recruteur est obligatoire")]
     private ?string $prenomRecruteur = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank(message:"l'adresse est obligatoire")]
     private ?string $adresse = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message:"la date est obligatoire")]
+    private ?\DateTimeInterface $dateEntentien = null;
+
+    public function __construct()
+    {
+        $this->createdAt= new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -120,6 +136,18 @@ class Entretien
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getDateEntentien(): ?\DateTimeInterface
+    {
+        return $this->dateEntentien;
+    }
+
+    public function setDateEntentien(\DateTimeInterface $dateEntentien): self
+    {
+        $this->dateEntentien = $dateEntentien;
 
         return $this;
     }

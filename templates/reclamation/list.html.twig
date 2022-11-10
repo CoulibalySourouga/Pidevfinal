@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste des Reclamations{% endblock %}
+{% block body %}
+    <div  class="masonry">
+        <div style="align-items: center" class="bricks-wrapper h-group">
+
+            <div class="grid-sizer"></div>
+
+            <div style="" class="brick entry featured-grid animate-this">
+                <div class="entry__content">
+
+                    <div class="featured-post-slider">
+
+                        <div class="featured-post-slide">
+                            <div class="f-slide">
+
+                                <div class="f-slide__background" style="background-image:url('images/thumbs/featured/featured-1.jpg');"></div>
+                                <div class="f-slide__overlay"></div>
+
+                                <div class="f-slide__content">
+                                    <ul class="f-slide__meta">
+                                        <li>{{ dateDujour|date }}</li>
+                                        <li><a href="#" >Listes des reclamations</a></li>
+                                    </ul>
+
+                                    <h1 class="f-slide__title"><a href="single-standard.html" title="">Bienvenue sur la page des Reclamations.</a></h1>
+                                </div>
+
+                            </div> <!-- f-slide -->
+                        </div> <!-- featured-post-slide -->
+
+                        <div class="featured-post-slide">
+                            <div class="f-slide">
+
+                                <div class="f-slide__background" style="background-image:url('images/thumbs/featured/featured-2.jpg');"></div>
+                                <div class="f-slide__overlay"></div>
+
+                                <div class="f-slide__content">
+                                    <ul class="f-slide__meta">
+                                        <li>{{ dateDujour|date }}</li>
+                                        <li><a href="#" >listes des reclamations</a></li>
+                                    </ul>
+
+                                    <h1 class="f-slide__title"><a href="single-standard.html" title="">Bienvenue sur la page des Reclamations.</a></h1>
+                                </div>
+
+                            </div> <!-- f-slide -->
+                        </div> <!-- featured-post-slide -->
+
+
+                    </div> <!-- end feature post slider -->
+
+                    <div class="featured-post-nav">
+                        <button class="featured-post-nav__prev">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12.707 17.293L8.414 13H18v-2H8.414l4.293-4.293-1.414-1.414L4.586 12l6.707 6.707z"></path></svg>
+                        </button>
+                        <button class="featured-post-nav__next">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M11.293 17.293l1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"></path></svg>
+                        </button>
+                    </div> <!-- featured-post-nav -->
+
+                </div> <!-- end entry content -->
+            </div> <!-- end entry, featured grid -->
+            {% for i in ListReclamations %}
+                <article class="brick entry format-standard animate-this">
+
+                    <div style="background: #0a0a0a" class="entry__thumb">
+                        <a href="single-standard.html" class="thumb-link">
+                            <img style="width: 60px;height: 60px; border-radius: 10%" src="{{ asset('assets/20200404_160907.jpg') }}" alt="">
+                        </a>
+                    </div> <!-- end entry__thumb -->
+
+                    <div class="entry__text">
+                        <div class="entry__header">
+
+                            <div class="entry__meta">
+                                <span class="entry__cat-links">
+                                   <label> Nom de l'utilisateur:</label>
+                                   <label><a href="#">{{ i.nomUser }} </a></label>
+                                    <label>Prenom de l'utilisateur </label>
+                                   <label> <a href="#">{{ i.prenomUser }} </a></label>
+                                    <label> Type d'utilisateur:</label>
+                                   <label><a href="#">{{ i.typeUser }} </a></label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="entry__excerpt">
+                            <label> Contenu</label>
+                            <p>  {{ i.contenu |slice(0,100) }}...</p>
+                        </div>
+                        <div style="font-size: 10px;margin:0px;padding: 0px" class="btn-group">
+                            <a style="padding: 0px; font-size: 10px; height: 50px;text-align: center;margin: 0px" href="{{ path('app_viewReclamation',{"id":i.id}) }}" class="btn btn-sm btn-outline-secondary">Details</a>
+                            <a style="padding: 0px; font-size: 10px; height: 50px;text-align: center;margin: 0px" href="{{ path('appp_updateReclamation',{"id":i.id}) }}" class="btn btn-sm btn-outline-secondary">Update</a>
+                            <a style="padding: 0px; font-size: 10px; height: 50px;text-align: center;margin: 0px" href="{{ path('app_deleteReclamation',{"id":i.id}) }}" class="btn btn-sm btn-outline-secondary" onclick="return confirm('voulez-vous supprimer cette reclamation!!')">Delete</a>
+                        </div>
+                        <small class="text-muted">{{ i.createdAt |date("d/m/y") }}</small>
+                    </div> <!-- end entry__text -->
+
+                </article>
+            {% endfor %}
+
+        </div>
+
+    </div> <!-- end brick-wrapper -- -->
+
+    </div> <!-- end masonry -->
+{% endblock %}
